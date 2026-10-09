@@ -25,8 +25,46 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.example.CustomList</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
 
 
+
+
+<!-- Way to run the project and how to fetch from github
+
+# 1. Download the code
+git clone https://github.com/YOUR_USERNAME/java-cicd-demo.git
+cd java-cicd-demo
+
+# 2. Compile and run all unit tests locally
+mvn clean test
+
+# 3. Package the app into an executable JAR file in target/
+mvn package
+
+# 4. Run the compiled application locally
+java -jar target/demo-1.0.0-SNAPSHOT.jar
+
+
+
+
+
+
+
+-->
