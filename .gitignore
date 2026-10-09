@@ -1,0 +1,17 @@
+# Maven build outputs
+target/
+*.jar
+*.war
+*.ear
+
+# Maven release plugin files
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+pom.xml.versionsBackup
+release.properties
+
+# Crash logs
+hs_err_pid*
+
+.idea/
