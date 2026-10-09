@@ -5,7 +5,7 @@ on:
     branches: ["dev", "main"]
 
 jobs:
-  #CI job, this will build and test our pushed code and then set up downstream resources for CD
+  # CI job: Builds and tests pushed code, then uploads artifact for CD
   build-and-test:
     name: Build, Test & Push Image
     runs-on: ubuntu-latest
@@ -50,25 +50,10 @@ jobs:
       #     push: true
       #     tags: ${{ secrets.DOCKER_USERNAME }}/demo-app:latest
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  # CD job, this will pull our artiface and deploy
+  # CD job: Pulls the artifact and executes deployment
   deploy:
     name: Deploy Application
     needs: build-and-test
-    # Condition: Only run CD on pushes to main branch after CI passes
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
 
@@ -80,7 +65,7 @@ jobs:
           echo "Target branch: ${{ github.ref_name }}"
 
       # ---------------------------------------------------------------------
-      # FUTURE DOCKER DEPLOYMEnt (pull image)
+      # FUTURE DOCKER DEPLOYMENT (pull image)
       # ---------------------------------------------------------------------
       # - name: Deploy via SSH
       #   uses: appleboy/ssh-action@v1.0.3
