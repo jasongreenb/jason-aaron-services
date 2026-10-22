@@ -6,12 +6,10 @@ import java.util.Arrays;
 
 
 public class CustomList<E> {
-// hi jason
-for the record i didnt think it was dumb
 
     // --- Fields ---
     private static final int DEFAULT_CAPACITY = 2;
-    public int currentCapacity = 1;
+    public int currentCapacity;
     public Object[] data;
     public int size; // Tracks the number of actual elements stored
 
