@@ -36,6 +36,8 @@ public class CustomList<E> {
         return this.size == this.currentCapacity;
     }
 
+    private boolean isEmpty() {return this.size == 0;}
+
     private void resize() {
         //  copyArray = Arrays.copyOf(oldArray, numberOfElementsToCopyOver)
 
@@ -61,6 +63,11 @@ public class CustomList<E> {
     }
 
     public void add(E element) {
+        if(element == null) {
+            return;
+        }
+
+
 
         if (isFull()) {
             resize();
@@ -73,8 +80,13 @@ public class CustomList<E> {
 
             // next open slot == size
 
-            this.data[this.size] = element;
-            this.size += 1;
+
+
+            if(element != null) {
+                this.data[this.size] = element;
+                this.size += 1;
+            }
+
 
         }
 
@@ -98,7 +110,6 @@ public class CustomList<E> {
 
     }
 
-
     // 0 < index < size-1
     public boolean isIndexInBounds(int index) {
         return index >= 0 && index <= size() - 1;
@@ -107,33 +118,29 @@ public class CustomList<E> {
 
     public void set(int index, E element) {
 
+        if(element == null) {
+            return;
+        }
+
         if(isIndexInBounds(index)) {
-
-            if(this.data[index] == null) {
-                System.out.println("WE ARE IN THE SET FUNCTION, THIS SPOT WAS EMPTY!");
-                this.data[index] = element;
-                this.size += 1;
-            } else {
-                System.out.println("WE ARE IN THE SET FUNCTION, THIS SPOT WAS NOT EMPTY LOL!");
-                this.data[index] = element;
-            }
-
+            this.data[index] = element;
         }
 
     }
 
+    // returns the index of the passed element if it exists in the list else returns -1
     public int find(E element) {
+        if(isEmpty()) {return -1;}
+
+
         for(int i = 0; i < this.size(); i++) {
-            if ( this.data[i].equals(element) ) {
+            if (this.data[i] != null && this.data[i].equals(element) ) {
                 return i;
             }
         }
 
         System.out.println("Item does not exist in list");
         return -1;
-
-
-
 
     }
 
@@ -155,40 +162,114 @@ public class CustomList<E> {
         }
     }
 
+    public void remove(E element) {
+        if(element == null) {
+            System.out.println("Please Pass a valid elemnt\n");
+            return;
+        }
+
+        // make sure list is not empty
+        if( isEmpty() ) {
+            System.out.println("EMPTY LIST!\n");
+            return;
+        }
+
+        //1. Check if the element exists  - .find() which will return us the index where this element is
+        int elementPosition = find(element);
+        if (elementPosition == -1 ) {
+            return;
+        }
+
+        if (size() == 1) {
+            this.data[0] = null;
+            this.size = 0;
+            return;
+        }
+
+
+        // @elementPosition is our variable to delete, everything after it slides left one
+
+        for (int i = elementPosition; i < size() - 1; i++) {
+            if(this.data[i+1] != null) {
+                this.data[i] = this.data[i+1];
+            } else {
+                this.data[i] = null;
+                this.size--;
+                return;
+            }
+
+        }
+
+        this.data[size() - 1] = null;
+        this.size--;
+
+
+
+    }
+
 // jasons current change
 
     public static void main(String[] args) {
-        CustomList<String> customListObject1 = new CustomList<>();
-        CustomList<String> customListObject2 = new CustomList<>(5);
+        CustomList<String> emptyList = new CustomList<>();
+        CustomList<String> listOfSizeOne = new CustomList<>(1);
+        CustomList<String> listOfSizeTwo = new CustomList<>(2);
+        CustomList<String> listOfContigousValuesSize4 = new CustomList<>(4);
+        CustomList<String> listOfContigousValuesSize4LastOneIsNull = new CustomList<>(5);
 
-        for(int i = 1; i <= 99; i++) {
-            customListObject1.add("Hello" + i);
-        }
 
-        customListObject1.printSize(); // 99
-        customListObject1.printCurrentCapacity(); // 128
-        customListObject1.set(107, "HelloYouStupidBitch");
-        String objectAtPosition107 = customListObject1.get(107);
-        System.out.println(String.format("Object at position 107: %s", objectAtPosition107));
-        customListObject1.printSize(); // 100
-        customListObject1.set(107, "HelloYouStupidBitchNEWVERISIONLOL");
-        objectAtPosition107 = customListObject1.get(107);
-        System.out.println(String.format("Object at position 107: %s", objectAtPosition107));
-        customListObject1.add("Blue 42");
+//
+//        emptyList.remove("hello");
+//
+//
+//        listOfSizeOne.add("One");
+//        listOfSizeOne.remove("One");
+//        System.out.println("listOfSizeOne after removing One\n");
+//        listOfSizeOne.printEverything();
 
-        customListObject1.printEverything();
 
-        int index = customListObject1.find("thereisnowaythisexistsinthelist");
-        if(index != -1) {
-            String itemFromList = customListObject1.get(index);
-            System.out.println(String.format("ITEM FROM LIST: %s", itemFromList));
-        }
+        //        listOfSizeTwo.add("One");
+        //listOfSizeTwo.add("Two");
+//        listOfSizeOne.remove("One");
+//        System.out.println("listOfSizeTwo after removing One\n");
+//        listOfSizeOne.printEverything();
 
-        index = customListObject1.find("Hello3");
-        if(index != -1) {
-            String itemFromList = customListObject1.get(index);
-            System.out.println(String.format("ITEM FROM LIST: %s", itemFromList));
-        }
+        //        listOfSizeTwo.add("One");
+        //listOfSizeTwo.add("Two");
+//        listOfSizeOne.remove("Two");
+//        System.out.println("listOfSizeTwo after removing Two\n");
+//        listOfSizeOne.printEverything();
+
+
+
+
+//        listOfContigousValuesSize4.add("One");
+//        listOfContigousValuesSize4.add("Two");
+//        listOfContigousValuesSize4.add("Three");
+//        listOfContigousValuesSize4.add("Four");
+//        listOfContigousValuesSize4.remove("Four");
+//        listOfContigousValuesSize4.printEverything();
+//        listOfContigousValuesSize4.printSize();
+
+        listOfContigousValuesSize4LastOneIsNull.add("One");
+        listOfContigousValuesSize4LastOneIsNull.add("Two");
+        listOfContigousValuesSize4LastOneIsNull.add("Three");
+        listOfContigousValuesSize4LastOneIsNull.add("Four");
+        listOfContigousValuesSize4LastOneIsNull.add(null);
+        listOfContigousValuesSize4LastOneIsNull.remove("Four");
+        listOfContigousValuesSize4LastOneIsNull.remove("One");
+        listOfContigousValuesSize4LastOneIsNull.remove(null);
+        listOfContigousValuesSize4LastOneIsNull.remove("Three");
+        listOfContigousValuesSize4LastOneIsNull.printEverything();
+        listOfContigousValuesSize4LastOneIsNull.printSize();
+
+
+
+
+
+
+
+
+
 
 
 
