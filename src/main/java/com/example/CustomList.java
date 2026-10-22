@@ -90,7 +90,7 @@ public class CustomList<E> {
     public E get(int index) {
         // index = 69
         if (isIndexInBounds(index)) {
-            return (E) this.data[index - 1];
+            return (E) this.data[index];
         } else {
             System.out.println("YOU FUCKING PASSED TOO BIG OR TOO SMALL OF AN INDEX!");
             return null;
@@ -98,23 +98,28 @@ public class CustomList<E> {
 
     }
 
+
+    // 0 < index < size-1
     public boolean isIndexInBounds(int index) {
-        return index >= 0 && index <= this.currentCapacity - 1;
+        return index >= 0 && index <= size() - 1;
     }
+
 
     public void set(int index, E element) {
 
         if(isIndexInBounds(index)) {
 
-            if(this.data[index-1] == null) {
+            if(this.data[index] == null) {
                 System.out.println("WE ARE IN THE SET FUNCTION, THIS SPOT WAS EMPTY!");
-                this.data[index - 1] = element;
+                this.data[index] = element;
                 this.size += 1;
             } else {
                 System.out.println("WE ARE IN THE SET FUNCTION, THIS SPOT WAS NOT EMPTY LOL!");
-                this.data[index - 1] = element;
+                this.data[index] = element;
             }
 
+        } else {
+            System.out.println(String.format("SET FAILED INDEX: %d , current size: %d ", index, size()));
         }
 
 
