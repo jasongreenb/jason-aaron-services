@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 
 public class CustomList<E> {
-// hi aaron
+// hi jason
 for the record i didnt think it was dumb
 
     // --- Fields ---
