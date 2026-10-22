@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class CustomList<E> {
 
-
+for the record i didnt think it was dumb
 
     // --- Fields ---
     private static final int DEFAULT_CAPACITY = 2;
