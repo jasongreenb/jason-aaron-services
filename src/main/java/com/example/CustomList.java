@@ -1,6 +1,9 @@
 package com.example;
-
 import java.util.Arrays;
+
+
+
+
 
 public class CustomList<E> {
 
