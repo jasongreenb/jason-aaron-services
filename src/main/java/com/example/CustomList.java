@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 
 public class CustomList<E> {
-        // this is my change :)
+
 
 
     // --- Fields ---
