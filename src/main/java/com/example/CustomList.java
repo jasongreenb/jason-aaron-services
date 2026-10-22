@@ -162,6 +162,7 @@ public class CustomList<E> {
         customListObject1.set(107, "HelloYouStupidBitchNEWVERISIONLOL");
         objectAtPosition107 = customListObject1.get(107);
         System.out.println(String.format("Object at position 107: %s", objectAtPosition107));
+        customListObject1.add("Blue 42");
 
         customListObject1.printEverything();
 
