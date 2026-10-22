@@ -60,12 +60,12 @@ public class CustomList<E> {
 
     }
 
-    public void add(E e) {
+    public void add(E element) {
 
         if (isFull()) {
             resize();
 
-            this.data[this.size] = e;
+            this.data[this.size] = element;
             this.size += 1;
 
 
@@ -73,7 +73,7 @@ public class CustomList<E> {
 
             // next open slot == size
 
-            this.data[this.size] = e;
+            this.data[this.size] = element;
             this.size += 1;
 
         }
@@ -118,9 +118,21 @@ public class CustomList<E> {
                 this.data[index] = element;
             }
 
-        } else {
-            System.out.println(String.format("SET FAILED INDEX: %d , current size: %d ", index, size()));
         }
+
+    }
+
+    public int find(E element) {
+        for(int i = 0; i < this.size(); i++) {
+            if ( this.data[i].equals(element) ) {
+                return i;
+            }
+        }
+
+        System.out.println("Item does not exist in list");
+        return -1;
+
+
 
 
     }
@@ -166,6 +178,17 @@ public class CustomList<E> {
 
         customListObject1.printEverything();
 
+        int index = customListObject1.find("thereisnowaythisexistsinthelist");
+        if(index != -1) {
+            String itemFromList = customListObject1.get(index);
+            System.out.println(String.format("ITEM FROM LIST: %s", itemFromList));
+        }
+
+        index = customListObject1.find("Hello3");
+        if(index != -1) {
+            String itemFromList = customListObject1.get(index);
+            System.out.println(String.format("ITEM FROM LIST: %s", itemFromList));
+        }
 
 
 
