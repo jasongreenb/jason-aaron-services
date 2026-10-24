@@ -3,8 +3,6 @@ import java.util.Arrays;
 
 
 
-
-
 public class CustomList<E> {
 
     // --- Fields ---
@@ -43,6 +41,8 @@ public class CustomList<E> {
 
         Object[] copyArray = Arrays.copyOf(this.data, this.currentCapacity);
 
+
+
         for (int i = 0; i < this.currentCapacity; i++) {
             this.data[i] = null;
         }
@@ -66,7 +66,6 @@ public class CustomList<E> {
         if(element == null) {
             return;
         }
-
 
 
         if (isFull()) {
@@ -98,6 +97,8 @@ public class CustomList<E> {
         // if it is full
         // we need to resize()
     }
+
+
 
     public E get(int index) {
         // index = 69
