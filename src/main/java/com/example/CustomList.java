@@ -30,13 +30,13 @@ public class CustomList<E> {
         System.out.println(String.format("The current capacity is at %d ", this.currentCapacity));
     }
 
-    private boolean isFull() {
+    public boolean isFull() {
         return this.size == this.currentCapacity;
     }
 
-    private boolean isEmpty() {return this.size == 0;}
+    public boolean isEmpty() {return this.size == 0;}
 
-    private void resize() {
+    public void resize() {
         //  copyArray = Arrays.copyOf(oldArray, numberOfElementsToCopyOver)
 
         Object[] copyArray = Arrays.copyOf(this.data, this.currentCapacity);
