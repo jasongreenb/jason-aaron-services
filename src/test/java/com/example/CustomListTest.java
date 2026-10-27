@@ -44,7 +44,7 @@ public class CustomListTest {
 
     }
 
-    @Testh
+    @Test
     @DisplayName("Set an element by index")
     void testSet() {
         customList.add("HiJason");
