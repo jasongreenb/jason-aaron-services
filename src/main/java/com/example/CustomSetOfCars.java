@@ -17,6 +17,13 @@ public class CustomSetOfCars  {
         cars.add(new CarRecord<String,Integer>("Chevy",2004));
         cars.printKeys();
 
+        cars.add(null);
+        cars.add(new CarRecord<>(null, 2018));
+        cars.add(new CarRecord<>("Chevy", null));
+
+        cars.printKeys();
+
+
     }
     // define what a car record is: CarRecord = <car,year>
     public record CarRecord<L,R>(L car, R year) {};
@@ -28,11 +35,23 @@ public class CustomSetOfCars  {
         this.cars = new HashMap<>();
 
     }
-//example    carRecord = <'Chevy',2004>
+
+
+    public boolean validateCarRecord(CarRecord<String,Integer> carRecord) {
+        if (carRecord == null || carRecord.car() == null || carRecord.year() == null) { return false;}
+        if (carRecord.year() <= 1980 || carRecord.year() >= 2027) { return false;}
+
+        return true;
+    }
+
+
+
+    //example    carRecord = <'Chevy',2004>
     public void add(CarRecord<String,Integer> carRecord) {
         //validation
-        if (carRecord == null || carRecord.car() == null || carRecord.year() == null) { return;}
-        if (carRecord.year() <= 1980 || carRecord.year() >= 2027) { return;}
+        if(!validateCarRecord(carRecord)) {
+            return;
+        }
 
 
         if (!this.cars.containsKey(carRecord)) {
@@ -41,6 +60,12 @@ public class CustomSetOfCars  {
             System.out.println("THIS CAR AND MODEL EXISTED ALREADY");
         }
 
+    }
+
+    public void remove(CarRecord<String,Integer> carRecord) {
+        if(!validateCarRecord(carRecord)) {
+            return;
+        }
     }
 
     public void printKeys() {
