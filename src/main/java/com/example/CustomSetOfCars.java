@@ -18,19 +18,20 @@ public class CustomSetOfCars  {
         cars.printKeys();
 
     }
-
-
+    // define what a car record is: CarRecord = <car,year>
     public record CarRecord<L,R>(L car, R year) {};
+
+    // a map that holds CarRecord as the key with the value as 1 if that carRecord exists
     HashMap<CarRecord<String,Integer>, Integer> cars;
 
     public CustomSetOfCars(){
-        this.cars = new HashMap<CarRecord<String,Integer>, Integer>();
+        this.cars = new HashMap<>();
 
     }
 //example    carRecord = <'Chevy',2004>
     public void add(CarRecord<String,Integer> carRecord) {
         //validation
-        if (carRecord == null || carRecord.car() == null) { return;}
+        if (carRecord == null || carRecord.car() == null || carRecord.year() == null) { return;}
         if (carRecord.year() <= 1980 || carRecord.year() >= 2027) { return;}
 
 
@@ -47,7 +48,7 @@ public class CustomSetOfCars  {
      //  carRecords =  {<"chevy",2004>,<"chevy",2003>}
         // for car in carRecords {}
         for(CarRecord<String,Integer> car: carRecords) {
-            System.out.println(String.format("car: %s , year: %d", car.car, car.year ));
+            System.out.println(String.format("car: %s , year: %d", car.car(), car.year() ));
         }
     }
 
