@@ -37,7 +37,7 @@ public class CustomSetOfCars  {
     }
 
 
-    public boolean validateCarRecord(CarRecord<String,Integer> carRecord) {
+    public boolean carRecordIsValid(CarRecord<String,Integer> carRecord) {
         if (carRecord == null || carRecord.car() == null || carRecord.year() == null) { return false;}
         if (carRecord.year() <= 1980 || carRecord.year() >= 2027) { return false;}
 
@@ -49,7 +49,7 @@ public class CustomSetOfCars  {
     //example    carRecord = <'Chevy',2004>
     public void add(CarRecord<String,Integer> carRecord) {
         //validation
-        if(!validateCarRecord(carRecord)) {
+        if(!carRecordIsValid(carRecord)) {
             return;
         }
 
@@ -63,7 +63,7 @@ public class CustomSetOfCars  {
     }
 
     public void remove(CarRecord<String,Integer> carRecord) {
-        if(!validateCarRecord(carRecord)) {
+        if(!carRecordIsValid(carRecord)) {
             return;
         }
     }
