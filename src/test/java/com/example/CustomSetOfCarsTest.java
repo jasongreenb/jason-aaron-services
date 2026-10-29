@@ -60,7 +60,7 @@ public class CustomSetOfCarsTest {
         CustomSetOfCars.CarRecord<String, Integer> duplicateValidRecord = new CustomSetOfCars.CarRecord<>("Honda", 2015);
         customSet.add(duplicateValidRecord);
         assertEquals(1, customSet.size(), "The size of this set should still be 1 even after adding 2 objects with identical values");
-       //4 Test adding an invalid
+
 
     }
 
