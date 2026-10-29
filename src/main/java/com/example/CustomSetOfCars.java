@@ -53,6 +53,12 @@ public class CustomSetOfCars  {
         return this.cars;
     }
 
+    //
+    public boolean isSubSet(CustomSetOfCars otherCarSet) {return true;};
+
+    public CustomSetOfCars intersect(CustomSetOfCars otherCarSet) {
+        return new CustomSetOfCars("intersectSet");
+    }
 
     // (1,2,3).subtract(1,2,4) = (3)
     public CustomSetOfCars subtract(CustomSetOfCars otherCarSet) {
@@ -126,7 +132,6 @@ public class CustomSetOfCars  {
         return this.cars.containsKey(carRecord);
     }
 
-
     public boolean carRecordIsValid(CarRecord<String,Integer> carRecord) {
         if (carRecord == null || carRecord.car() == null || carRecord.year() == null) {
             System.out.println("CAR RECORD PASSED WAS NOT VALID BECAUSE OF NULL VALUES");
@@ -141,8 +146,6 @@ public class CustomSetOfCars  {
         return true;
     }
 
-
-
     //example    carRecord = <'Chevy',2004>
     public void add(CarRecord<String,Integer> carRecord) {
         //validation
@@ -153,6 +156,7 @@ public class CustomSetOfCars  {
 
         if (!this.cars.containsKey(carRecord)) {
             this.cars.put(carRecord, 1);
+
         } else {
             System.out.println(String.format("THIS CAR AND MODEL EXISTED ALREADY brand: %s, year: %d inside of the customCarSet: %s", carRecord.car(), carRecord.year(), this.name));
         }

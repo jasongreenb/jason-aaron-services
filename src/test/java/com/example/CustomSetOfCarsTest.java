@@ -1,9 +1,9 @@
 package com.example;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
 import static org.junit.jupiter.api.Assertions.*;
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 public class CustomSetOfCarsTest {
 
@@ -20,6 +20,7 @@ public class CustomSetOfCarsTest {
 
     @Test
     @DisplayName("Check if Car Record is Valid")
+    @Order(1)
     void testCarRecordIsValid(){
 
         // 1. Test a valid car record (should return true)
@@ -39,9 +40,8 @@ public class CustomSetOfCarsTest {
         // 6. Test a record with a year that is too far in the future (>= 2027)
         CustomSetOfCars.CarRecord<String, Integer> futureCar = new CustomSetOfCars.CarRecord<>("Honda", 2300);
 
-
-
     }
+
     @Test
     @DisplayName("Add a car record")
     void testAdd(){
