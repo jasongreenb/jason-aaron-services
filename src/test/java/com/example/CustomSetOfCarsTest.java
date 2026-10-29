@@ -9,6 +9,7 @@ public class CustomSetOfCarsTest {
 
     // Corrected the type declaration and variable name syntax
     private CustomSetOfCars customSet;
+    private Object customSetOfCars;
 
     @BeforeEach
     void init() {
@@ -32,11 +33,11 @@ public class CustomSetOfCarsTest {
         CustomSetOfCars.CarRecord<String, Integer> nullBrand = new CustomSetOfCars.CarRecord<>(null, 2015);
         assertFalse(customSet.carRecordIsValid(nullBrand), "A record with a null brand should be invalid");
         // 4. Test a record with a null year (should return false)
-        CustomSetOfCars.CarRecord<String, Integer>nullYear = new CustomSetOfCars.CarRecord<>("Honda", null);
+        CustomSetOfCars.CarRecord<String, Integer> nullYear = new CustomSetOfCars.CarRecord<>("Honda", null);
         assertFalse(customSet.carRecordIsValid(nullYear), "A Record with a null year should be invalid");
         // 5. Test a record with a year that is too old (<= 1980)
         CustomSetOfCars.CarRecord<String, Integer> tooOld = new CustomSetOfCars.CarRecord<>("Honda", 1800);
-        assertFalse(customSet.carRecordIsValid(tooOld), "A record with a year that is older t han 1980 should be invalid");
+        assertFalse(customSet.carRecordIsValid(tooOld), "A record with a year that is older than 1980 should be invalid");
         // 6. Test a record with a year that is too far in the future (>= 2027)
         CustomSetOfCars.CarRecord<String, Integer> futureCar = new CustomSetOfCars.CarRecord<>("Honda", 2300);
 
@@ -45,6 +46,7 @@ public class CustomSetOfCarsTest {
     @Test
     @DisplayName("Add a car record")
     void testAdd(){
+
         //1 Test adding a valid car to the set
         CustomSetOfCars.CarRecord<String, Integer> validRecord = new CustomSetOfCars.CarRecord<>("Honda", 2015);
         customSet.add(validRecord);
@@ -53,6 +55,12 @@ public class CustomSetOfCarsTest {
         customSet.add(validRecord);
         customSet.add(validRecord);
         assertEquals(1, customSet.size(), "The size of this set should still be 1 even after adding the same car twice");
-        //3
+        //3 Test adding 2 car records with identical values but different objects
+        customSet.add(validRecord);
+        CustomSetOfCars.CarRecord<String, Integer> duplicateValidRecord = new CustomSetOfCars.CarRecord<>("Honda", 2015);
+        customSet.add(duplicateValidRecord);
+        assertEquals(1, customSet.size(), "The size of this set should still be 1 even after adding 2 objects with identical values");
+       //4 Test adding an invalid
+
     }
 }
