@@ -256,10 +256,8 @@ public class CustomList<E> {
         listOfContigousValuesSize4LastOneIsNull.add("Three");
         listOfContigousValuesSize4LastOneIsNull.add("Four");
         listOfContigousValuesSize4LastOneIsNull.add(null);
-        listOfContigousValuesSize4LastOneIsNull.remove("Four");
         listOfContigousValuesSize4LastOneIsNull.remove("One");
         listOfContigousValuesSize4LastOneIsNull.remove(null);
-        listOfContigousValuesSize4LastOneIsNull.remove("Three");
         listOfContigousValuesSize4LastOneIsNull.printEverything();
         listOfContigousValuesSize4LastOneIsNull.printSize();
 
