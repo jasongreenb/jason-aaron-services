@@ -54,7 +54,25 @@ public class CustomSetOfCars  {
     }
 
     //
-    public boolean isSubSet(CustomSetOfCars otherCarSet) {return true;};
+    public boolean isSubSet(CustomSetOfCars otherCarSet) {
+
+        if(otherCarSet == null) {
+            return false;
+        }
+
+        // we are naming the thing that we are unpacking from the otherCarSets keys
+        for(CarRecord<String,Integer> car : otherCarSet.getCarRecords()) {
+            if(!containsCarRecord(car)) {
+                return false;
+            }
+        }
+
+
+        return true;
+
+
+
+    }
 
     public CustomSetOfCars intersect(CustomSetOfCars otherCarSet) {
         return new CustomSetOfCars("intersectSet");
