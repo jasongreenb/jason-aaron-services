@@ -116,7 +116,7 @@ public class CustomSetOfCarsTest {
         //6 passed one set that is null
         CustomSetOfCars setI = new CustomSetOfCars("setI");
         CustomSetOfCars setJ = null;
-        CustomSetOfCars.CarRecord<String, Integer> car12 = new CustomSetOfCars.CarRecord<>("Honda", 2019);
+        CarRecord<String, Integer> car12 = new CarRecord<>("Honda", 2019);
         setI.add(car12);
         CustomSetOfCars setUNIONED6 = setI.union(setJ);
         assertNull(setUNIONED6);
