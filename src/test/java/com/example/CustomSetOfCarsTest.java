@@ -122,4 +122,78 @@ public class CustomSetOfCarsTest {
         assertNull(setUNIONED6);
     }
 
+
+    @Test
+    @DisplayName("Subtracting between 2 sets")
+    void testSubrtact(){
+        //Test Subtracting Where Both Sets are Empty
+        CustomSetOfCars setK = new CustomSetOfCars("setK");
+        CustomSetOfCars setL = new CustomSetOfCars("setL");
+        CustomSetOfCars subtractSet = setK.subtract(setL);
+        assertEquals(0, subtractSet.size());
+        //Something minus empty
+        CustomSetOfCars setA = new CustomSetOfCars("setA");
+        CustomSetOfCars setB = new CustomSetOfCars("setB");
+        CarRecord<String, Integer> car1 = new CarRecord<>("Lambo", 2016);
+        CarRecord<String,Integer> car2 = new CarRecord<>("Bugatti", 2016);
+        setA.add(car1);
+        setA.add(car2);
+        CustomSetOfCars subtractSet2 = setA.subtract(setB);
+        assertEquals(setA.size(),subtractSet2.size() );
+        //Nothing minus something
+        CustomSetOfCars setC = new CustomSetOfCars("setC");
+        CustomSetOfCars setD = new CustomSetOfCars("setD");
+        CarRecord<String, Integer> car3 = new CarRecord<>("Lambo", 2016);
+        CarRecord<String,Integer> car4 = new CarRecord<>("Bugatti", 2016);
+        setD.add(car3);
+        setD.add(car4);
+        CustomSetOfCars subtractSet3 = setC.subtract(setD);
+        assertEquals(0, subtractSet3.size());
+        //Something minus the same thing
+        CustomSetOfCars setE = new CustomSetOfCars("setE");
+        CustomSetOfCars setF = new CustomSetOfCars("setF");
+        CarRecord <String, Integer> car5 = new CarRecord<>("Mazda", 2010);
+        CarRecord <String, Integer> car6 = new CarRecord<>("Mustang", 1995);
+        setE.add(car5);
+        setE.add(car6);
+        setF.add(car5);
+        setF.add(car6);
+        CustomSetOfCars subtractSet4 = setE.subtract(setF);
+        assertEquals(0, subtractSet4.size());
+        //Somethign minus something but only partially 1,2 - 1
+        CustomSetOfCars setG = new CustomSetOfCars("setG");
+        CustomSetOfCars setH = new CustomSetOfCars("setH");
+        setG.add(car5);
+        setG.add(car4);
+        setH.add(car4);
+        CustomSetOfCars subtractSet5 = setG.subtract(setH);
+        assertEquals(1, subtractSet5.size());
+        //Something minus something heres an example (1,2) - (2,3,4)
+        CustomSetOfCars setI = new CustomSetOfCars("setI");
+        CustomSetOfCars setJ = new CustomSetOfCars("setJ");
+        CarRecord<String, Integer> car11 = new CarRecord<>("Pablo", 2015);
+        CarRecord<String, Integer> car22 = new CarRecord<>("Smith", 2015);
+        CarRecord<String, Integer> car33 = new CarRecord<>("Honda", 2015);
+        CarRecord<String, Integer> car44 = new CarRecord<>("Kal", 2015);
+        setI.add(car11);
+        setI.add(car22);
+        setJ.add(car22);
+        setJ.add(car33);
+        setJ.add(car44);
+        CustomSetOfCars subtractSet6 = setI.subtract(setJ);
+        assertEquals(1,subtractSet6.size());
+        //SOmething minus something heres another example (1,2) - (1,2,3,4)
+        CustomSetOfCars setKk = new CustomSetOfCars("setK");
+        CustomSetOfCars setLl = new CustomSetOfCars("setL");
+        setKk.add(car11);
+        setKk.add(car22);
+        setLl.add(car11);
+        setLl.add(car22);
+        setLl.add(car33);
+        setLl.add(car44);
+        CustomSetOfCars subtractSet7 = setKk.subtract(setLl);
+        assertEquals(0, subtractSet7.size());
+    }
+
+
 }
