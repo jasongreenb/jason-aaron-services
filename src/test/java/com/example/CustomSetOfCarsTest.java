@@ -63,5 +63,55 @@ public class CustomSetOfCarsTest {
 
 
     }
+    @Test
+    @DisplayName("Union between 2 sets")
+    void testUnion(){
+        //1 Testing both sets are empty
+        CustomSetOfCars setA = new CustomSetOfCars("setA");
+        CustomSetOfCars setB = new CustomSetOfCars("setB");
+        CustomSetOfCars setUNIONED = setA.union(setB);
+        assertEquals(0, setUNIONED.size());
+        //2 testing one set is empty, other set has cars
+        CustomSetOfCars.CarRecord<String, Integer> car = new CustomSetOfCars.CarRecord<>("Honda", 2015);
+        setB.add(car);
+        CustomSetOfCars setUNIONED2 = setA.union(setB);
+        assertEquals (1, setUNIONED2.size());
+        //3 testing the reverse, first set has cars, other set is empty
+        CustomSetOfCars setC = new CustomSetOfCars("setC");
+        CustomSetOfCars setD = new CustomSetOfCars("setD");
+        CustomSetOfCars.CarRecord<String, Integer> car2 = new CustomSetOfCars.CarRecord<>("Honda", 2015);
+        setD.add(car2);
+        CustomSetOfCars setUNIONED3 = setC.union(setD);
+        assertEquals(1, setUNIONED3.size());
+        //4 where both sets have cars, but none of the cars overlap.
+        CustomSetOfCars setE = new CustomSetOfCars ("setE");
+        CustomSetOfCars setF = new CustomSetOfCars ("setF");
+        CustomSetOfCars.CarRecord<String, Integer> car3 = new CustomSetOfCars.CarRecord<>("Honda", 2015);
+        CustomSetOfCars.CarRecord<String, Integer> car4 = new CustomSetOfCars.CarRecord<>("Ford", 2015);
+        CustomSetOfCars.CarRecord<String, Integer> car5 = new CustomSetOfCars.CarRecord<>("Mazda", 2015);
+        CustomSetOfCars.CarRecord<String, Integer> car6 = new CustomSetOfCars.CarRecord<>("Mustang", 2015);
+        setE.add(car3);
+        setE.add(car4);
+        setF.add(car5);
+        setF.add(car6);
+        CustomSetOfCars setUNIONED4 = setE.union(setF);
+        assertEquals(4, setUNIONED4.size());
+        //5 both sets have cars, but they share some of the exact same car records
+        CustomSetOfCars setG = new CustomSetOfCars("setG");
+        CustomSetOfCars setH = new CustomSetOfCars("setH");
+        CustomSetOfCars.CarRecord<String, Integer> car7 = new CustomSetOfCars.CarRecord<>("Honda", 2016);
+        CustomSetOfCars.CarRecord<String, Integer> car8 = new CustomSetOfCars.CarRecord<>("Ford", 2016);
+        CustomSetOfCars.CarRecord<String, Integer> car9 = new CustomSetOfCars.CarRecord<>("Mazda", 2016);
+        CustomSetOfCars.CarRecord<String, Integer> car10 = new CustomSetOfCars.CarRecord<>("Mustang", 2016);
+        CustomSetOfCars.CarRecord<String, Integer> car11 = new CustomSetOfCars.CarRecord<>("Lambo", 2016);
+        setG.add(car7);
+        setG.add(car8);
+        setG.add(car9);
+        setH.add(car7);
+        setH.add(car10);
+        setH.add(car11);
+        CustomSetOfCars setUNIONED5 = setG.union(setH);
+        assertEquals(5, setUNIONED5.size());
+    }
 
 }
