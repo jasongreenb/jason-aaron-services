@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import com.example.Objects.CarRecord;
 
 public class CustomSetOfCars  {
 
@@ -43,7 +44,6 @@ public class CustomSetOfCars  {
 
     }
     // define what a car record is: CarRecord = <car,year>
-    public record CarRecord<L,R>(L car, R year) {};
 
     // a map that holds CarRecord as the key with the value as 1 if that carRecord exists
     HashMap<CarRecord<String,Integer>, Integer> cars;
