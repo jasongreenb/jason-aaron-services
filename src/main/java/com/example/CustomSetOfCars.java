@@ -82,10 +82,13 @@ public class CustomSetOfCars  {
 
         CustomSetOfCars intersectSet = new CustomSetOfCars("intersectSet");
 
-        for (CarRecord<String, Integer> carRecord: getCars().keySet()){
-            if (otherCarSet.getCars().keySet().contains(carRecord)){
+        Set<CarRecord<String,Integer>> carRecordsFromOtherSet = otherCarSet.getCarRecords();
+
+        for (CarRecord<String, Integer> carRecord: getCarRecords()){
+
+            if (carRecordsFromOtherSet.contains(carRecord)){
                 intersectSet.add(carRecord);
-                 }
+            }
         }
         return intersectSet;
     }
