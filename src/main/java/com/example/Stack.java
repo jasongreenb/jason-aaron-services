@@ -1,21 +1,38 @@
 package com.example;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Stack<T> {
 
+    private ArrayList<T> data;
+
     // Constructor
     public Stack() {
-        // Nothing implemented yet
+        this.data = new ArrayList<T>();
     }
 
     // Adds an item to the top of the stack
     public void push(T item) {
-        // Nothing implemented yet
+        if(isNull(item)) {
+            return;
+        }
+
+        this.data.add(item);
+
+    }
+
+    public boolean isNull(T item) {
+        return item == null;
     }
 
     // Removes and returns the top item
     public T pop() {
-        // Nothing implemented yet
+        if (!isEmpty()) {
+            T itemFromTheBack = this.data.get(this.data.size() - 1);
+            this.data.remove(itemFromTheBack);
+            return itemFromTheBack;
+        }
+
         return null;
     }
 
@@ -35,8 +52,7 @@ public class Stack<T> {
 
     // Checks if the stack has no items
     public boolean isEmpty() {
-        // Nothing implemented yet
-        return false;
+        return this.data.size() == 0;
     }
 
     // Returns the total number of items
