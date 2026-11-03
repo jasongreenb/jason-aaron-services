@@ -25,6 +25,14 @@ public class Stack<T> {
         return null;
     }
 
+    // Gets the index of the item, returns -1 if it doesnt exist
+    public int search(T item) {
+        // Nothing implemented yet
+        return 0;
+    }
+
+
+
     // Checks if the stack has no items
     public boolean isEmpty() {
         // Nothing implemented yet
