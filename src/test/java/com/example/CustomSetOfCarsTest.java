@@ -194,6 +194,84 @@ public class CustomSetOfCarsTest {
         CustomSetOfCars subtractSet7 = setKk.subtract(setLl);
         assertEquals(0, subtractSet7.size());
     }
+    @Test
+    @DisplayName("Removing a car record")
+    void testRemove() {
+
+        //Removing valid car record
+        CustomSetOfCars setA = new CustomSetOfCars("setA");
+        CarRecord<String, Integer> car1 = new CarRecord<>("Prius", 2015);
+        CarRecord<String, Integer> car2 = new CarRecord<>("Honda", 2015);
+        setA.add(car1);
+        setA.add(car2);
+        setA.remove(car1);
+        assertEquals(1, setA.size());
+        assertTrue(setA.containsCarRecord(car2));
+        assertFalse(setA.containsCarRecord(car1));
+        //Removing invalid car record
+        CustomSetOfCars setB = new CustomSetOfCars("setB");
+        setB.add(car1);
+        setB.add(car2);
+        CarRecord<String, Integer> car3 = new CarRecord<>("Spyder", 2004);
+        setB.remove(null);
+        setB.remove(car3);
+        assertEquals(2, setB.size());
+        //Clearing the whole set now
+        CustomSetOfCars setC = new CustomSetOfCars("setC");
+        setC.add(car1);
+        setC.add(car2);
+        setC.add(car3);
+        setC.remove(car1);
+        setC.remove(car2);
+        setC.remove(car3);
+        assertEquals(0, setC.size());
+    }
+    @Test
+    @DisplayName("Testing whether or not a set is a subset of another")
+    void testIsSubSet(){
+        //Testing 2 empty sets
+        CustomSetOfCars setD = new CustomSetOfCars("setD");
+        CustomSetOfCars setE = new CustomSetOfCars("setE");
+        assertTrue(setD.isSubSet(setE));
+        //Testing one empty one populated
+        CustomSetOfCars setF = new CustomSetOfCars("setF");
+        CustomSetOfCars setG = new CustomSetOfCars("setG");
+        CarRecord<String, Integer> car3 = new CarRecord<>("Spyder", 2008);
+        CarRecord<String, Integer> car4 = new CarRecord<>("Spyder", 2001);
+        CarRecord<String, Integer> car5 = new CarRecord<>("Spyder", 2002);
+        setF.add(car3);
+        setF.add(car4);
+        setF.add(car5);
+        assertFalse(setG.isSubSet(setF));
+        //Testing good scenario where one is actually a subset of the other
+        CustomSetOfCars setH = new CustomSetOfCars("setH");
+        CustomSetOfCars setI = new CustomSetOfCars("setI");
+        setH.add(car3);
+        setH.add(car4);
+        setH.add(car5);
+        setI.add(car3);
+        setI.add(car4);
+        assertTrue(setH.isSubSet(setI));
+        //Testing that 2 indetical sets will be subset of themselves
+        CustomSetOfCars setAA = new CustomSetOfCars("setAA");
+        CustomSetOfCars setBB = new CustomSetOfCars("setBB");
+        setAA.add(car3);
+        setAA.add(car4);
+        setBB.add(car3);
+        setBB.add(car4);
+        assertTrue(setAA.isSubSet(setBB));
+        //Not a subset scenario
+        CustomSetOfCars setCC = new CustomSetOfCars ("setCC");
+        CustomSetOfCars setDD = new CustomSetOfCars ("setDD");
+        setCC.add(car3);
+        setCC.add(car4);
+        setCC.add(car5);
+        setDD.add(car3);
+        setDD.add(car4);
+        CarRecord<String, Integer> car6 = new CarRecord<>("Spyder", 2000);
+        setDD.add(car6);
+        assertFalse(setCC.isSubSet(setDD));
 
 
+    }
 }

@@ -75,8 +75,23 @@ public class CustomSetOfCars  {
     }
 
     public CustomSetOfCars intersect(CustomSetOfCars otherCarSet) {
-        return new CustomSetOfCars("intersectSet");
+        if (otherCarSet == null) {
+            return null;
+        }
+
+
+        CustomSetOfCars intersectSet = new CustomSetOfCars("intersectSet");
+
+        for (CarRecord<String, Integer> carRecord: getCars().keySet()){
+            if (otherCarSet.getCars().keySet().contains(carRecord)){
+                intersectSet.add(carRecord);
+                 }
+        }
+        return intersectSet;
     }
+
+
+
 
     // (1,2,3).subtract(1,2,4) = (3)
     public CustomSetOfCars subtract(CustomSetOfCars otherCarSet) {
