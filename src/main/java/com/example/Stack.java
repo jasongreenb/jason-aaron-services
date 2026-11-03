@@ -64,7 +64,6 @@ public class Stack<T> {
 
     // Returns the total number of items
     public int size() {
-        // Nothing implemented yet
-        return 0;
+        return this.data.size();
     }
 }
