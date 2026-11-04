@@ -38,7 +38,9 @@ public class Stack<T> {
 
     // Looks at the top item without removing it
     public T peek() {
-        // Nothing implemented yet
+        if (!isEmpty()){
+           return this.data.get(this.data.size()- 1);
+        }
         return null;
     }
 
