@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Queue<T> {
 
-    ArrayList<T> data;
+    private ArrayList<T> data;
 
 
     // Constructor
@@ -15,33 +15,46 @@ public class Queue<T> {
 
     // Adds an item to the back (end) of the queue
     public void enqueue(T item) {
-        // Nothing implemented yet
+        if(isNull(item)){
+            return;
+        }
+        this.data.add(item);
     }
+
+
+    public boolean isNull(T item){
+        return item == null;
+    }
+
 
     // Removes and returns the item at the front of the queue
     public T dequeue() {
         // Nothing implemented yet
-        // check is it empty
+        if(this.data.isEmpty()){
+            return null;
+        }
 
-        this.data.remove(0);
-        return null;
+        return this.data.remove(0);
     }
 
     // Looks at the front item without removing it
     public T peek() {
         // Nothing implemented yet
-        return null;
+        if(this.data.isEmpty()) {
+            return null;
+        }
+        return this.data.get(0);
     }
 
+
+
+
+
     // Checks if the queue has no items
-    public boolean isEmpty() {
-        // Nothing implemented yet
-        return false;
-    }
+    public boolean isEmpty(){return this.data.size()== 0;}
 
     // Returns the total number of items
     public int size() {
-        // Nothing implemented yet
-        return 0;
+        return this.data.size();
     }
 }

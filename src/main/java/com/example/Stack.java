@@ -47,7 +47,7 @@ public class Stack<T> {
     // Gets the index of the item, returns -1 if it doesnt exist
     public int search(T item) {
         for (int i = 0; i < this.data.size(); i++ ){
-            if (this.data.get(i) == item){
+            if (this.data.get(i).equals(item)){
                 return i;
             }
 
