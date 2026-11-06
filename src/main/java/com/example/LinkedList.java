@@ -41,6 +41,15 @@ public class LinkedList {
     }
 
     public void printAllElements() {
+
+        if(isNull() || getSize() == 0){
+            return;
+        }
+        Node tempNode = this.head;
+        while (tempNode != null){
+           System.out.println(String.format("The node val:%d and name: %s",tempNode.value, tempNode.name));
+           tempNode = tempNode.next;
+        }
         // start at head with a "walker" variable as long as head
         // is not null
 
@@ -56,6 +65,18 @@ public class LinkedList {
         return this.size;
     }
     public static void main(String[] args){
+        LinkedList LL = new LinkedList();
+        Node nodeOne = new Node(3, "Penis");
+        Node nodeTwo = new Node(4, "Butt");
+        Node nodeThree = new Node(5, "JasonIsNeverGettingACat");
+        LL.add(nodeOne);
+        LL.add(nodeTwo);
+        LL.add(nodeThree);
+        LL.printAllElements();
+    }
+
+
+    public boolean doesNodeExist(Node){
 
     }
 
