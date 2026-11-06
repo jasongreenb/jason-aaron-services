@@ -5,7 +5,9 @@ public class LinkedList {
     Node head;
     int size;
 
-    public LinkedList(){}
+    public LinkedList(){
+        // constructor , what should head be and size
+    }
 
     public void add(Node node) {
         // is this LinkedList empty
