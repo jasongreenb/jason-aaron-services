@@ -64,20 +64,43 @@ public class LinkedList {
     public int getSize(){
         return this.size;
     }
+    public boolean doesNodeExist(Node node){
+        // MAKE SURE THE NODE BEING PASSED ISNT NULL
+        //MAKE SURE HEAD IS NOT NULL
+        if(isNull() || getSize() == 0){
+            return false;
+        }
+        if (!nodeIsValid(node)){
+            return false;
+        }
+        Node tempNode = this.head;
+        while(tempNode != null){
+            // if this node isntr nmull and equal to Node that is pased in does node exist then it exists :)
+            if (tempNode == node){
+                System.out.println("it does");
+                return true;
+            }
+            tempNode = tempNode.next;
+        }
+        System.out.println("it doesnt");
+        return false;
+    }
+
     public static void main(String[] args){
         LinkedList LL = new LinkedList();
         Node nodeOne = new Node(3, "Penis");
         Node nodeTwo = new Node(4, "Butt");
         Node nodeThree = new Node(5, "JasonIsNeverGettingACat");
+        Node nodeFour = new Node(5, "JasonIsNeverGettingACat");
         LL.add(nodeOne);
         LL.add(nodeTwo);
         LL.add(nodeThree);
         LL.printAllElements();
-    }
-
-
-    public boolean doesNodeExist(Node){
+        LL.doesNodeExist(nodeTwo);
+        LL.doesNodeExist(nodeFour);
 
     }
+
+
 
 }
