@@ -3,14 +3,20 @@ package com.example;
 public class Owner {
     public String name;
     public int age;
-    public CustomList<Cat> petList = new CustomList<>();
+    public CustomList<Cat> petList;
 
     record Cat(String name, int age){}
 
+    public Owner(String name, int age){
+        this.name = name;
+        this.age = age;
+        petList = new CustomList<>();
 
+
+    }
 
     public static void main(String[] args){
-        Owner Jason = new Owner();
+        Owner Jason = new Owner("Jason", 21);
         Cat Luna = new Cat("Luna", 5);
         Jason.addCat(Luna);
         System.out.println("The size is " + Jason.petList.size());
