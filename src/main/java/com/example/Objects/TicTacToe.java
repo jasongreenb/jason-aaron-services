@@ -76,7 +76,7 @@ public class TicTacToe {
 
             if(isOwinner) {return "O wins";}
 
-            return "-1";
+
             // i = 0
 
             // check does rows 0-2 make X a winner
@@ -90,6 +90,7 @@ public class TicTacToe {
             // check does rows 0-2 make X a winner
             // check does rows 0-2 make O a winner
         }
+        return "-1";
     }
 
     // return 'X' or 'O' or mid-game 'mid-game ' or 'draw'
