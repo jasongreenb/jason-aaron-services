@@ -60,7 +60,7 @@ public class TicTacToe {
             boolean isXwinner = true;
 
             for(int j = 0; j < rows; j++) {
-                if(board[j][i] == 'O') {
+                if(board[j][i] != 'X') {
                     isXwinner = false;
                 }
             }
@@ -96,9 +96,7 @@ public class TicTacToe {
     // return 'X' or 'O' or mid-game 'mid-game ' or 'draw'
     public String checkWinner(char[][] board) {
 
-        if(isThereAnEmptySpot(board)) {
-            return "mid-game";
-        }
+
         int rows = board.length;
         int cols = board[0].length;
         String horizontalCheck = checkHorizontals(board, rows, cols);
@@ -107,7 +105,7 @@ public class TicTacToe {
             return "FAILURE";
         }
 
-        if(horizontalCheck != "-1") {
+        if(horizontalCheck.equals( "-1")) {
             return horizontalCheck;
         }
 
@@ -117,12 +115,18 @@ public class TicTacToe {
             return "FAILURE";
         }
 
-        if(verticalCheck != "-1") {
+        if(verticalCheck.equals("-1")) {
             return verticalCheck;
         }
 
 
         // check diagnols if none are winner it is a draw
+
+
+        if(isThereAnEmptySpot(board)) {
+            return "mid-game";
+        }
+
 
         return "draw";
     }
@@ -157,7 +161,7 @@ public class TicTacToe {
             System.out.println("-------------");
         }
     }
-
+    // isEmptyAt(row = 0 , col = 1) ==> board[row][col] ==> board[0][1]
     public boolean isEmptyAt(char[][] mainBoard, int row, int col){
         return mainBoard[row][col] == ' ';
     }
