@@ -59,7 +59,7 @@ public class TicTacToe {
 
             return "X WINS";
         }
-        if ((board[0][0] == 'O' && board[1][1] == 'O' && board [2][2] =='O') || || board[0][2] == 'O' && board[1][1] == 'O' && board[2][0] == 'O'){
+        if ((board[0][0] == 'O' && board[1][1] == 'O' && board [2][2] =='O') || board[0][2] == 'O' && board[1][1] == 'O' && board[2][0] == 'O'){
             return "O WINS";
         }
         return "-1";
