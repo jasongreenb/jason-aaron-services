@@ -175,35 +175,36 @@ public class TicTacToe {
             System.out.println("the Row you entered = " + row + " Col you entered " + col);
 
 
+            while(!ticTacToe.inputsValid(row,col)) {
+                System.out.print("Enter row 0-2 the last one was invalid\n");
+                row = scanner.nextInt();
 
-            // if this spot is valid (which means empty and not X)
-            if(!ticTacToe.isEmptyAt(game1, row, col)){
-                System.out.print("Enter row 0-2 the last one was invalid");
-                int row2 = scanner.nextInt();
-
-
-                System.out.print("Enter col 0-2 the last one was invalid");
-                int col2 = scanner.nextInt();
-                ticTacToe.setX(game1, row2, col2);
-
-
-
-            } else{
-                if(xTurn) {
-                    ticTacToe.setX(game1,row,col);
-                    xTurn = false;
-                } else {
-                    ticTacToe.setO(game1,row,col);
-                    xTurn = true;
-                }
-
-
+                System.out.print("Enter col 0-2 the last one was invalid\n");
+                col = scanner.nextInt();
             }
+
+            while(  !ticTacToe.isEmptyAt(game1,row,col)  ) {
+                System.out.print("Enter row 0-2 the last one was invalid\n");
+                row = scanner.nextInt();
+
+                System.out.print("Enter col 0-2 the last one was invalid\n");
+                col = scanner.nextInt();
+            }
+
+            if(xTurn) {
+                ticTacToe.setX(game1,row,col);
+                xTurn = false;
+            } else {
+                ticTacToe.setO(game1,row,col);
+                xTurn = true;
+            }
+
             result = ticTacToe.checkWinner(game1);
 
         }
 
         System.out.println("THE WINNER IS -> " + result);
+        ticTacToe.printBoard(game1);
 
 
 
@@ -221,6 +222,15 @@ public class TicTacToe {
             System.out.println("-------------");
         }
     }
+
+    boolean inputsValid(int row,int col) {
+        if((row < 3 && row >= 0) && (col < 3 && col >=0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // isEmptyAt(row = 0 , col = 1) ==> board[row][col] ==> board[0][1]
     public boolean isEmptyAt(char[][] mainBoard, int row, int col){
         return mainBoard[row][col] == ' ';
