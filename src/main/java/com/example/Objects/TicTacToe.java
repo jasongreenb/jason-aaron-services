@@ -1,5 +1,5 @@
 package com.example.Objects;
-
+import java.util.Scanner;
 // example
 // Dog.getCountOfDogsMade() <- this was a static method
 // rosie.bark() <- this is a non static method
@@ -25,6 +25,8 @@ public class TicTacToe {
         }
         return mainBoard;
     }
+
+
 
 
     public String checkHorizontals(char[][] board, int rows, int cols) {
@@ -151,23 +153,46 @@ public class TicTacToe {
 
 
     public static void main (String[] args){
+        // listen to input from console
+        Scanner scanner = new Scanner(System.in);
+
         TicTacToe ticTacToe = new TicTacToe("Jason");
         char[][] game1 = ticTacToe.getANewBoard();
 
-        ticTacToe.setX(game1, 0, 0);
-        ticTacToe.setX(game1, 0, 1);
-        ticTacToe.setX(game1, 0, 2);
-        ticTacToe.setO(game1, 1,0);
-        ticTacToe.setO(game1, 1,1);
-        ticTacToe.setO(game1, 1,2);
-        ticTacToe.printBoard(game1);
+        boolean xTurn = true;
+        String result = "mid-game";
+        while(result == "mid-game") {
+            ticTacToe.printBoard(game1);
+            System.out.println((xTurn ? "X" : "O") + "'s turn.");
+            System.out.print("Enter row (0-2): ");
 
-        String winner = ticTacToe.checkWinner(game1);
-        System.out.println(winner);
-        char[][] game2 = ticTacToe.getANewBoard();
+            // input()
+            int row = scanner.nextInt();
+            System.out.print("Enter col (0-2): ");
+
+            // input()
+            int col = scanner.nextInt();
+            System.out.println("the Row you entered = " + row + " Col you entered " + col);
+
+            if(xTurn) {
+                ticTacToe.setX(game1,row,col);
+                xTurn = false;
+            } else {
+                ticTacToe.setO(game1,row,col);
+                xTurn = true;
+            }
+
+            result = ticTacToe.checkWinner(game1);
+
+        }
+
+        System.out.println("THE WINNER IS -> " + result);
+
+
 
 
     }
+
     public void printBoard(char[][] mainBoard){
         System.out.println("-------------");
         for (int i = 0; i < 3; i++){
