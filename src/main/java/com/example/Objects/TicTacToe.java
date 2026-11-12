@@ -105,7 +105,7 @@ public class TicTacToe {
             return "FAILURE";
         }
 
-        if(horizontalCheck.equals( "-1")) {
+        if(!horizontalCheck.equals( "-1")) {
             return horizontalCheck;
         }
 
@@ -115,7 +115,7 @@ public class TicTacToe {
             return "FAILURE";
         }
 
-        if(verticalCheck.equals("-1")) {
+        if(!verticalCheck.equals("-1")) {
             return verticalCheck;
         }
 
