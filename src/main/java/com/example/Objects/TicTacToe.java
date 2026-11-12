@@ -174,14 +174,31 @@ public class TicTacToe {
             int col = scanner.nextInt();
             System.out.println("the Row you entered = " + row + " Col you entered " + col);
 
-            if(xTurn) {
-                ticTacToe.setX(game1,row,col);
-                xTurn = false;
-            } else {
-                ticTacToe.setO(game1,row,col);
-                xTurn = true;
-            }
 
+
+            // if this spot is valid (which means empty and not X)
+            if(!ticTacToe.isEmptyAt(game1, row, col)){
+                System.out.print("Enter row 0-2 the last one was invalid");
+                int row2 = scanner.nextInt();
+
+
+                System.out.print("Enter col 0-2 the last one was invalid");
+                int col2 = scanner.nextInt();
+                ticTacToe.setX(game1, row2, col2);
+
+
+
+            } else{
+                if(xTurn) {
+                    ticTacToe.setX(game1,row,col);
+                    xTurn = false;
+                } else {
+                    ticTacToe.setO(game1,row,col);
+                    xTurn = true;
+                }
+
+
+            }
             result = ticTacToe.checkWinner(game1);
 
         }
@@ -222,12 +239,12 @@ public class TicTacToe {
     }
 
     public void setX(char[][] mainBoard, int row, int col){
-        if (isEmptyAt (mainBoard, row, col)){
+        if (isEmptyAt (mainBoard, row, col) &&! isSpotO(mainBoard, row, col)){
            mainBoard[row][col] = 'X';
         }
     }
     public void setO(char[][] mainBoard, int row, int col){
-        if (isEmptyAt (mainBoard, row, col)){
+        if (isEmptyAt (mainBoard, row, col) &&! isSpotX(mainBoard, row, col)){
             mainBoard[row][col] = 'O';
         }
     }
