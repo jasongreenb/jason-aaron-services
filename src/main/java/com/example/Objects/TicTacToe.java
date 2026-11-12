@@ -54,6 +54,17 @@ public class TicTacToe {
         return "-1";
     }
 
+    public String checkDiagonals(char[][] board){
+        if ((board[0][0] == 'X' && board[1][1] == 'X' && board [2][2] =='X') || board[0][2] == 'X' && board[1][1] == 'X' && board[2][0] == 'X'){
+
+            return "X WINS";
+        }
+        if ((board[0][0] == 'O' && board[1][1] == 'O' && board [2][2] =='O') || || board[0][2] == 'O' && board[1][1] == 'O' && board[2][0] == 'O'){
+            return "O WINS";
+        }
+        return "-1";
+    }
+
     public String checkVerticals(char[][] board, int rows, int cols) {
         for(int i = 0; i < cols; i++) {
 
@@ -117,6 +128,13 @@ public class TicTacToe {
 
         if(!verticalCheck.equals("-1")) {
             return verticalCheck;
+        }
+
+
+        String diagonalCheck = checkDiagonals(board);
+
+        if(diagonalCheck != "-1"){
+            return diagonalCheck;
         }
 
 
