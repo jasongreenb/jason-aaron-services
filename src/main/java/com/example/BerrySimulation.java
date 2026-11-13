@@ -20,6 +20,8 @@ public class BerrySimulation {
 
         field = new BerryField(3,3);
         field.printField();
+        field.grow();
+        field.printField();
 
 
     }
@@ -106,7 +108,8 @@ class BerryField {
                 char berryAmount = this.berryField[i][j];
                 int berryAmountNumber = Character.getNumericValue(berryAmount);
                 berryAmountNumber += 1;
-
+                char newBerryAmount = Character.forDigit(berryAmountNumber, 10);
+                this.berryField[i][j] = newBerryAmount;
             }
         }
     }
