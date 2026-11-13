@@ -9,42 +9,51 @@ public class BerrySimulation {
     }
 
 
+    BerryField field = null;
 
 
 
-
-    public char[][] startSimulation(){
-        char[][] mainSimulation = new char[3][3];
-            for(int i = 0; i < mainSimulation.length; i++){
-                for(int j = 0; j < mainSimulation.length; j++){
-                    mainSimulation[i][j] = '0';
-                    // help maybe
-                }
-            }
-            return mainSimulation;
-    }
-    public void printSimulation(char[][]mainSimulation){
-        System.out.println("-----------------");
-        for(int i = 0; i < mainSimulation.length; i++){
-            System.out.print("| ");
-            for (int j = 0; j < mainSimulation.length; j++){
-                System.out.print(mainSimulation[i][j] + " | ");
-            }
-            System.out.println();
-            System.out.println("-----------------");
+    public void startSimulation(int rows, int cols) {
+        if(!checkIsRowColPairValid(rows,cols)) {
+            return;
         }
+
+        field = new BerryField(3,3);
+        field.printField();
+
+
+    }
+
+    public void printSimulation(char[][]mainSimulation){
+   //     field.printField();
     }
 
 
 
+    public boolean checkIsRowColPairValid(int rows, int cols) {
+        if(rows == cols && rows > 2 ) {return true;}
 
+        return false;
+    }
+
+    public boolean notStarted() {
+        return field == null;
+    }
 
 
     public static void main(String[] args){
+        BerrySimulation sim = new BerrySimulation("jason");
 
-    BerrySimulation berrySimulation = new BerrySimulation("Aaron");
-    char[][] sim1 = berrySimulation.startSimulation();
-    berrySimulation.printSimulation(sim1);
+
+
+
+        sim.startSimulation(3,3);
+
+        if(sim.notStarted()) {
+            // do something!
+        }
+
+
     }
 }
 
@@ -56,5 +65,39 @@ class Bear{
     public Bear(int row, int col){
         this.col = 0;
         this.row = 0;
+    }
+}
+
+
+class BerryField {
+    int rows;
+    int cols;
+    char[][] berryField;
+
+    public void printField() {
+        for(int i = 0; i < rows; i++) {
+            String stringToPrint = "";
+            for(int j = 0; j < cols; j++) {
+                stringToPrint += this.berryField[i][j];
+
+            }
+
+            System.out.println(String.format("%s", stringToPrint));
+        }
+    }
+
+
+    public BerryField(int rows, int cols) {
+
+        berryField = new char[rows][cols];
+        this.rows = rows;
+        this.cols = cols;
+
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                berryField[i][j] = '0';
+
+            }
+        }
     }
 }
