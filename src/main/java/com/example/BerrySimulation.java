@@ -100,4 +100,17 @@ class BerryField {
             }
         }
     }
+    public void grow(){
+        for(int i = 0; i < this.rows; i++){
+            for (int j = 0; j < this.cols; j++){
+                char berryAmount = this.berryField[i][j];
+                int berryAmountNumber = Character.getNumericValue(berryAmount);
+                berryAmountNumber += 1;
+
+            }
+        }
+    }
+
+
 }
+
