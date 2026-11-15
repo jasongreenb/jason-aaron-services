@@ -30,7 +30,7 @@ public class BerrySimulation {
             return;
         }
 
-        field = new BerryField(3,3, bearRecords);
+        field = new BerryField(rows,cols, bearRecords);
         field.printField();
         field.grow(); // after grow()
         // we call bearmove()
@@ -84,7 +84,11 @@ public class BerrySimulation {
 
 
 class BerryField {
-    record Bear(int row, int col){}
+    record Bear(int row, int col,int berriesEaten){
+        public Bear(int row, int col){
+            this(row,col,0);
+        }
+    }
 
     int rows;
     int cols;
@@ -155,7 +159,35 @@ class BerryField {
             }
         }
     }
+    public void makeBearsMove(){
+        int[] rowDirection = {-1, 1, 0, 0};
+        int[] colDirection = {-1, 1, 0, 0};
 
+        for(Bear bear: this.bears){
+            int randomDirection = (int) (Math.random()* 4);
+
+            int newRow = bear.row + rowDirection[randomDirection];
+            int newCol = bear.row + colDirection[randomDirection];
+
+
+            if (newRow >= 0 && newRow < this.rows && newCol >= 0 && newCol < this.cols){
+
+            } else{
+                System.out.println("Bear hit the boundary and didnt move");
+            }
+
+            char berryChar = this.berryField[newRow][newCol];
+            int berriesAtSpot = Character.getNumericValue(berryChar);
+
+            int totalBerriesEaten = bear.berriesEaten + berriesAtSpot;
+
+            this.berryField[bear.row][bear.col] = '0';
+
+            Bear movedBear = new Bear (newRow, newCol, totalBerriesEaten);
+            updatedBears.add(movedBear);
+
+        }
+    }
 
 }
 
