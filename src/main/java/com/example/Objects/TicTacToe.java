@@ -169,11 +169,11 @@ public class TicTacToe {
             while(result == "mid-game") {
                 ticTacToe.printBoard(game1);
                 System.out.println((xTurn ? "X" : "O") + "'s turn.");
-                System.out.print("Enter row (0-2): ");
+                System.out.print("Enter row (1-3): ");
 
                 // input()
                 int row = scanner.nextInt();
-                System.out.print("Enter col (0-2): ");
+                System.out.print("Enter col (1-3): ");
 
                 // input()
                 int col = scanner.nextInt();
@@ -181,26 +181,29 @@ public class TicTacToe {
 
 
                 while(!ticTacToe.inputsValid(row,col)) {
-                    System.out.print("Enter row 0-2 the last one was invalid\n");
+                    System.out.print("Enter row 1-3 the last one was invalid\n");
                     row = scanner.nextInt();
 
-                    System.out.print("Enter col 0-2 the last one was invalid\n");
+                    System.out.print("Enter col 1-3 the last one was invalid\n");
                     col = scanner.nextInt();
                 }
 
-                while(  !ticTacToe.isEmptyAt(game1,row,col)  ) {
-                    System.out.print("Enter row 0-2 the last one was invalid\n");
+                int adjustedRow = row - 1;
+                int adjustedCol = col - 1;
+
+                while(  !ticTacToe.isEmptyAt(game1,adjustedRow,adjustedCol)  ) {
+                    System.out.print("Enter row 1-3 the last one was invalid\n");
                     row = scanner.nextInt();
 
-                    System.out.print("Enter col 0-2 the last one was invalid\n");
+                    System.out.print("Enter col 1-3 the last one was invalid\n");
                     col = scanner.nextInt();
                 }
 
                 if(xTurn) {
-                    ticTacToe.setX(game1,row,col);
+                    ticTacToe.setX(game1,adjustedRow,adjustedCol);
                     xTurn = false;
                 } else {
-                    ticTacToe.setO(game1,row,col);
+                    ticTacToe.setO(game1,adjustedRow,adjustedCol);
                     xTurn = true;
                 }
 
@@ -250,7 +253,7 @@ public class TicTacToe {
     }
 
     boolean inputsValid(int row,int col) {
-        if((row < 3 && row >= 0) && (col < 3 && col >=0)) {
+        if((row <= 3 && row >= 1) && (col <= 3 && col >=1)) {
             return true;
         } else {
             return false;
