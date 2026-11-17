@@ -156,55 +156,81 @@ public class TicTacToe {
         // listen to input from console
         Scanner scanner = new Scanner(System.in);
 
-        TicTacToe ticTacToe = new TicTacToe("Jason");
-        char[][] game1 = ticTacToe.getANewBoard();
+        boolean playAgain = true;
 
-        boolean xTurn = true;
-        String result = "mid-game";
-        while(result == "mid-game") {
+        while(playAgain){
+
+            System.out.print("Starting New Game:");
+            TicTacToe ticTacToe = new TicTacToe("Jason");
+            char[][] game1 = ticTacToe.getANewBoard();
+
+            boolean xTurn = true;
+            String result = "mid-game";
+            while(result == "mid-game") {
+                ticTacToe.printBoard(game1);
+                System.out.println((xTurn ? "X" : "O") + "'s turn.");
+                System.out.print("Enter row (0-2): ");
+
+                // input()
+                int row = scanner.nextInt();
+                System.out.print("Enter col (0-2): ");
+
+                // input()
+                int col = scanner.nextInt();
+                System.out.println("the Row you entered = " + row + " Col you entered " + col);
+
+
+                while(!ticTacToe.inputsValid(row,col)) {
+                    System.out.print("Enter row 0-2 the last one was invalid\n");
+                    row = scanner.nextInt();
+
+                    System.out.print("Enter col 0-2 the last one was invalid\n");
+                    col = scanner.nextInt();
+                }
+
+                while(  !ticTacToe.isEmptyAt(game1,row,col)  ) {
+                    System.out.print("Enter row 0-2 the last one was invalid\n");
+                    row = scanner.nextInt();
+
+                    System.out.print("Enter col 0-2 the last one was invalid\n");
+                    col = scanner.nextInt();
+                }
+
+                if(xTurn) {
+                    ticTacToe.setX(game1,row,col);
+                    xTurn = false;
+                } else {
+                    ticTacToe.setO(game1,row,col);
+                    xTurn = true;
+                }
+
+                result = ticTacToe.checkWinner(game1);
+
+            }
+
+            System.out.println("THE WINNER IS -> " + result);
             ticTacToe.printBoard(game1);
-            System.out.println((xTurn ? "X" : "O") + "'s turn.");
-            System.out.print("Enter row (0-2): ");
 
-            // input()
-            int row = scanner.nextInt();
-            System.out.print("Enter col (0-2): ");
-
-            // input()
-            int col = scanner.nextInt();
-            System.out.println("the Row you entered = " + row + " Col you entered " + col);
-
-
-            while(!ticTacToe.inputsValid(row,col)) {
-                System.out.print("Enter row 0-2 the last one was invalid\n");
-                row = scanner.nextInt();
-
-                System.out.print("Enter col 0-2 the last one was invalid\n");
-                col = scanner.nextInt();
+            while(true){
+                System.out.print("Do you want to play again? (y/n): ");
+                String userResponse = scanner.next();
+                if(userResponse.equalsIgnoreCase("y")){
+                    playAgain = true;
+                    break;
+                }
+                else if(userResponse.equalsIgnoreCase("n")){
+                    playAgain = false;
+                    break;
+                }
+                else{
+                    System.out.println("INVALID: PLEASE INPUT \"y\" or \"n\" TO CONTINUE");
+                }
             }
 
-            while(  !ticTacToe.isEmptyAt(game1,row,col)  ) {
-                System.out.print("Enter row 0-2 the last one was invalid\n");
-                row = scanner.nextInt();
 
-                System.out.print("Enter col 0-2 the last one was invalid\n");
-                col = scanner.nextInt();
-            }
-
-            if(xTurn) {
-                ticTacToe.setX(game1,row,col);
-                xTurn = false;
-            } else {
-                ticTacToe.setO(game1,row,col);
-                xTurn = true;
-            }
-
-            result = ticTacToe.checkWinner(game1);
 
         }
 
-        System.out.println("THE WINNER IS -> " + result);
-        ticTacToe.printBoard(game1);
 
 
 
