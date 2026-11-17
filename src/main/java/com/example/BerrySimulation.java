@@ -1,4 +1,5 @@
 package com.example;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -14,24 +15,34 @@ public class BerrySimulation {
 
 
 
+    public void doTurn(int times) {
+        for(int i = 0; i < times; i++) {
+            System.out.println(String.format("----------------\nTurn: %d\n----------------", i + 1));
+            field.printField();
+            field.printBears();
+            field.makeBearsMove();
+            field.grow();
+        }
+    }
+
+
+
+
     public void startSimulation(int rows, int cols, HashSet<BerryField.Bear> bearRecords) {
         if(!checkIsRowColPairValid(rows,cols)) {
             return;
         }
 
         field = new BerryField(rows,cols, bearRecords);
-        field.printField();
-        field.grow(); // after grow()
-        // we call bearmove()
-        // then print bear stats where we loop through bear hash set and print how much
-        // each bear has eaten
-        field.printField();
+        field.grow();
+
+
 
 
     }
 
-    public void printSimulation(char[][]mainSimulation){
-   //     field.printField();
+    public void printSimulation(){
+        if(this.field != null) {field.printField();};
     }
 
 
@@ -53,10 +64,15 @@ public class BerrySimulation {
 
         HashSet<BerryField.Bear> bears = new HashSet<>();
         bears.add(new BerryField.Bear(1,1));
+        bears.add(new BerryField.Bear(2,2));
+
+
+        sim.startSimulation(5,5, bears);
+        sim.doTurn(5);
 
 
 
-        sim.startSimulation(3,3, bears);
+
 
         if(sim.notStarted()) {
             // do something!
@@ -81,31 +97,19 @@ class BerryField {
 
     int rows;
     int cols;
-    char[][] berryField;
+    char[][] data;
     HashSet<Bear> bears;
-
-    public void printField() {
-        for(int i = 0; i < rows; i++) {
-            String stringToPrint = "";
-            for(int j = 0; j < cols; j++) {
-                stringToPrint += this.berryField[i][j];
-
-            }
-
-            System.out.println(String.format("%s", stringToPrint));
-        }
-    }
 
 
     public BerryField(int rows, int cols) {
 
-        berryField = new char[rows][cols];
+        data = new char[rows][cols];
         this.rows = rows;
         this.cols = cols;
 
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < cols; j++){
-                berryField[i][j] = '0';
+                data[i][j] = '0';
 
                 
 
@@ -113,20 +117,19 @@ class BerryField {
         }
     }
 
-
     // bears -> { <0,1> , <1,2>, <2,6>} so in all these spots we put a B to start
     public BerryField(int rows, int cols, HashSet<Bear> bears) {
         this.bears = bears;
-        berryField = new char[rows][cols];
+        data = new char[rows][cols];
         this.rows = rows;
         this.cols = cols;
 
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < cols; j++){
                 if(this.bears.contains(new Bear(i,j))) {
-                    berryField[i][j] = 'B';
+                    data[i][j] = 'B';
                 } else{
-                    berryField[i][j] = '0';
+                    data[i][j] = '0';
                 }
 
 
@@ -137,45 +140,97 @@ class BerryField {
     public void grow(){
         for(int i = 0; i < this.rows; i++){
             for (int j = 0; j < this.cols; j++){
-                if(this.berryField[i][j] != 'B') {
-                    char berryAmount = this.berryField[i][j];
+                if(this.data[i][j] != 'B') {
+                    char berryAmount = this.data[i][j];
                     int berryAmountNumber = Character.getNumericValue(berryAmount);
                     berryAmountNumber += 1;
                     char newBerryAmount = Character.forDigit(berryAmountNumber, 10);
-                    this.berryField[i][j] = newBerryAmount;
+                    this.data[i][j] = newBerryAmount;
                 }
 
             }
         }
     }
-    public void makeBearsMove(){
+
+    public void printBears() {
+        System.out.println("*******************");
+        for(Bear bear: bears) {
+
+            System.out.println(String.format("rxc = (%d,%d) and the total berries eaten: %d\n", bear.row, bear.col, bear.berriesEaten));
+        }
+        System.out.println("*******************");
+
+    }
+
+    public void makeBearsMove() {
+
         int[] rowDirection = {-1, 1, 0, 0};
         int[] colDirection = {-1, 1, 0, 0};
+        HashSet<Bear> updatedBears = new HashSet<>();
 
         for(Bear bear: this.bears){
-            int randomDirection = (int) (Math.random()* 4);
+            // Math.random() -> 0->1
+            // 0->1 for ex: .67
+            // .67 * 4 -> 3.001
+            // int(3.001) = 3
 
-            int newRow = bear.row + rowDirection[randomDirection];
-            int newCol = bear.row + colDirection[randomDirection];
+
+            int randomDirectionRow = (int) (Math.random()* 4);
+            int randomDirectionCol = (int) (Math.random()* 4);
 
 
-            if (newRow >= 0 && newRow < this.rows && newCol >= 0 && newCol < this.cols){
+            // newRow = bear.Row + rowDirection[0->3]
+            // newCol = bear.Col + colDirection[0->3]
+            int newRow = bear.row + rowDirection[randomDirectionRow];
+            int newCol = bear.col + colDirection[randomDirectionCol];
 
-            } else{
-                System.out.println("Bear hit the boundary and didnt move");
+
+            // Check boundaries
+            if (newRow < 0 || newRow >= this.rows ||
+                    newCol < 0 || newCol >= this.cols) {
+
+                updatedBears.add(bear);
+                continue;
             }
 
-            char berryChar = this.berryField[newRow][newCol];
+            // Check whether another bear occupies the destination
+            if (this.data[newRow][newCol] == 'B') {
+                updatedBears.add(bear);
+                continue;
+            }
+
+
+
+            char berryChar = this.data[newRow][newCol];
             int berriesAtSpot = Character.getNumericValue(berryChar);
 
             int totalBerriesEaten = bear.berriesEaten + berriesAtSpot;
+            this.data[bear.row][bear.col] = '0';
+            this.data[newRow][newCol] = 'B';
+            Bear updatedBear = new Bear (newRow, newCol, totalBerriesEaten);
 
-            this.berryField[bear.row][bear.col] = '0';
+            updatedBears.add(updatedBear);
 
-            Bear movedBear = new Bear (newRow, newCol, totalBerriesEaten);
-            updatedBears.add(movedBear);
+
 
         }
+
+        this.bears = updatedBears;
+    }
+
+    public void printField() {
+        for(int i = 0; i < rows; i++) {
+            String stringToPrint = "";
+            for(int j = 0; j < cols; j++) {
+
+
+                stringToPrint += this.data[i][j];
+
+            }
+
+            System.out.println(String.format("%s", stringToPrint));
+        }
+        System.out.println("------------------------");
     }
 
 }
