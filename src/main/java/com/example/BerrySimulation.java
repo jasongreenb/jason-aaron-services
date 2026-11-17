@@ -2,17 +2,6 @@ package com.example;
 import java.util.HashSet;
 import java.util.Scanner;
 
-// make a function
-// that moves the bears after we call grow()
-// and it eats the spot it goes to and the spot it left becomes a 0
-// make the functionality work with just one bear
-// think about boudns if you are on a edge you cant go out of the map
-// add a field in the bear record to store how many berries this bear has eaten
-
-
-
-// so function called makeBearMoves();
-// after this function we can check how much that singular bear has eaten on this one move
 
 public class BerrySimulation {
     String name;
