@@ -160,50 +160,54 @@ public class TicTacToe {
 
         while(playAgain){
 
-            System.out.print("Starting New Game:");
+            System.out.print("Starting New Game:\n");
             TicTacToe ticTacToe = new TicTacToe("Jason");
             char[][] game1 = ticTacToe.getANewBoard();
 
             boolean xTurn = true;
             String result = "mid-game";
-            while(result == "mid-game") {
+            while(result.equals("mid-game")) {
                 ticTacToe.printBoard(game1);
                 System.out.println((xTurn ? "X" : "O") + "'s turn.");
-                System.out.print("Enter row (1-3): ");
 
-                // input()
-                int row = scanner.nextInt();
-                System.out.print("Enter col (1-3): ");
+                int row = -1;
+                int col = -1;
+                int adjustedRow = -1;
+                int adjustedCol = -1;
 
-                // input()
-                int col = scanner.nextInt();
-                System.out.println("the Row you entered = " + row + " Col you entered " + col);
-
-
-                while(!ticTacToe.inputsValid(row,col)) {
-                    System.out.print("Enter row 1-3 the last one was invalid\n");
+                // Robust input loop: checks bounds AND ensures the spot is empty
+                while(true) {
+                    System.out.print("Enter row (1-3): ");
                     row = scanner.nextInt();
-
-                    System.out.print("Enter col 1-3 the last one was invalid\n");
+                    System.out.print("Enter col (1-3): ");
                     col = scanner.nextInt();
-                }
+                    System.out.println("the Row you entered = " + row + " Col you entered " + col);
 
-                int adjustedRow = row - 1;
-                int adjustedCol = col - 1;
+                    // 1. Check if bounds are valid (1-3)
+                    if(!ticTacToe.inputsValid(row, col)) {
+                        System.out.print("Enter row 1-3 the last one was invalid\n");
+                        continue;
+                    }
 
-                while(  !ticTacToe.isEmptyAt(game1,adjustedRow,adjustedCol)  ) {
-                    System.out.print("Enter row 1-3 the last one was invalid\n");
-                    row = scanner.nextInt();
+                    // 2. Adjust for 0-indexed array
+                    adjustedRow = row - 1;
+                    adjustedCol = col - 1;
 
-                    System.out.print("Enter col 1-3 the last one was invalid\n");
-                    col = scanner.nextInt();
+                    // 3. Check if spot is empty
+                    if(!ticTacToe.isEmptyAt(game1, adjustedRow, adjustedCol)) {
+                        System.out.print("Enter row 1-3 the last one was invalid\n");
+                        continue;
+                    }
+
+                    // If we pass both checks, break out of the input loop
+                    break;
                 }
 
                 if(xTurn) {
-                    ticTacToe.setX(game1,adjustedRow,adjustedCol);
+                    ticTacToe.setX(game1, adjustedRow, adjustedCol);
                     xTurn = false;
                 } else {
-                    ticTacToe.setO(game1,adjustedRow,adjustedCol);
+                    ticTacToe.setO(game1, adjustedRow, adjustedCol);
                     xTurn = true;
                 }
 
@@ -229,10 +233,8 @@ public class TicTacToe {
                     System.out.println("INVALID: PLEASE INPUT \"y\" or \"n\" TO CONTINUE");
                 }
             }
-
-
-
         }
+
 
 
 
